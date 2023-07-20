@@ -5,6 +5,10 @@ __pycache__/
 
 # C extensions
 *.so
+# data
+urban_consumption/data/CO2_and_Oil.csv:Zone.Identifier
+urban_consumption/data/Meat_and_Egg_Production.csv:Zone.Identifier
+urban_consumption/data/Urbanization_GDP_and_Population.csv:Zone.Identifier
 
 # Distribution / packaging
 .Python
