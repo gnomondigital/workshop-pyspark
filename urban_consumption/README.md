@@ -23,3 +23,6 @@ The data in question has 2 files:
    meat_prod_tonnes, and Food Balance Sheets: Eggs - Production (FAO (2017)) (tonnes) ) 
    report country total data. Transform these three columns into per-capita data (divide by country's population.)
 5. Several rows in the Entity ​​column have the value World. Remove these rows, since they don’t correspond to any particular country.
+6. From the prepared dataset, create a new dataset that aggregates the values of the seven "descriptive" columns 
+   (over the years 2008 - 2012) for each country. Each row in the new dataset should contain the average value of the 
+   descriptive columns per country during this five-year period.

@@ -37,3 +37,9 @@ if __name__ == "__main__":
     # Remove rows with entity = World
 
     data_df_filtered = f.remove_world_entity(data_df_converted)
+
+    # Clean data before calculating the average
+    data_df_cleaned = f.cleanup_data(data_df_filtered)
+
+    #Get the average of each column per year
+    avg_year = f.average_per_year(data_df_cleaned)

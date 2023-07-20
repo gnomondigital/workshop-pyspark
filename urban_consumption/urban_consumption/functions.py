@@ -65,3 +65,34 @@ def remove_world_entity(data_df: DataFrame) -> DataFrame:
     filtered_data = data_df.filter(F.col("Entity") != "World")
     logging.info("Filtered data has %s rows", filtered_data.count())
     return filtered_data
+
+
+def cleanup_data(data_df: DataFrame) -> DataFrame:
+    """Cleanup data"""
+    logging.info("Dropping no longer needed columns")
+    data_df = data_df.drop(
+        *[
+            "meat_prod_tonnes",
+            "Food Balance Sheets: Eggs - Production (FAO (2017)) (tonnes)",
+            "Oil production (Etemad & Luciana) (terawatt-hours)",
+            "Population",
+        ]
+    )
+    logging.info("Replacing null values with zero")
+    data_df = data_df.na.fill(0)
+    logging.info("Renaming columns with spaces")
+    for col in data_df.columns:
+        data_df = data_df.withColumnRenamed(col, col.replace(" ", "_"))
+    data_df = data_df.withColumnRenamed("GDP_per_capita_(int.-$)_($)", "GDP_per_capita")
+    data_df.show()
+    return data_df
+
+
+def average_per_year(data_df: DataFrame) -> DataFrame:
+    """Calculate the average of all columns per year"""
+    avg_cols = [c for c in data_df.columns if c not in ["Entity", "Code", "Year"]]
+    avg_year = data_df.groupBy(F.col("Entity")).agg(
+        *[F.mean(c).alias(c) for c in avg_cols]
+    )
+    avg_year.show()
+    return avg_year
