@@ -17,3 +17,7 @@ if __name__ == "__main__":
     urban_gdp = f.read_csv(
         spark, os.path.abspath("data/Urbanization_GDP_and_Population.csv")
     )
+    # Keep only data between 2008 and 2012
+    urban_gdp = f.filter_dates(urban_gdp)
+    co2_and_oil = f.filter_dates(co2_and_oil)
+    meat_and_egg = f.filter_dates(meat_and_egg)
