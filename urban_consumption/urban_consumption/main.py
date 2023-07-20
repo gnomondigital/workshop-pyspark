@@ -21,3 +21,7 @@ if __name__ == "__main__":
     urban_gdp = f.filter_dates(urban_gdp)
     co2_and_oil = f.filter_dates(co2_and_oil)
     meat_and_egg = f.filter_dates(meat_and_egg)
+
+    # Merge Datasets
+    data_df = f.merge_dataframes(co2_and_oil, meat_and_egg, urban_gdp)
+    data_df.show()

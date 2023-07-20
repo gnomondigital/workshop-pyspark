@@ -38,3 +38,8 @@ def filter_dates(data_df: DataFrame) -> DataFrame:
     filtered_df.show()
     logging.info("Filtered data has %s rows", filtered_df.count())
     return filtered_df
+
+
+def merge_dataframes(df_1: DataFrame, df_2: DataFrame, df_3: DataFrame):
+    """Merge all dataframes into one"""
+    return df_1.join(df_2).join(df_3)
