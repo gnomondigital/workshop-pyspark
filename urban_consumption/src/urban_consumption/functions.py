@@ -104,5 +104,25 @@ def country_with_highest_avg_meat(data_df: DataFrame) -> str:
     highest_meat = data_df.agg(
         F.max(F.col("meat_prod_tonnes_per_capita")).alias("max_meat_prod"),
     ).first()["max_meat_prod"]
-    highest_country = data_df.filter(F.col("meat_prod_tonnes_per_capita") == highest_meat).first()["Entity"]
-    logging.info("The country with highest average meat production is %s.",highest_country)
+    highest_country = data_df.filter(
+        F.col("meat_prod_tonnes_per_capita") == highest_meat
+    ).first()["Entity"]
+    logging.info(
+        "The country with highest average meat production is %s.", highest_country
+    )
+    return highest_country
+
+
+def country_with_5th_highest_co2(data_df: DataFrame) -> str:
+    """Get the country that has the 5th highest CO2 emissions per capita
+    for the year 2010"""
+    highest_fifth_country = (
+        data_df.filter(F.col("Year") == 2010)
+        .orderBy(F.col("Per_capita_CO₂_emissions_(tonnes_per_capita)").desc())
+        .collect()[4]["Entity"]
+    )
+    logging.info(
+        "The country with the fifth highest CO2 emissions per capita is %s.",
+        highest_fifth_country,
+    )
+    return(highest_fifth_country)

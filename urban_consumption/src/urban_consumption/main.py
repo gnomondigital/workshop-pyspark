@@ -41,7 +41,11 @@ if __name__ == "__main__":
     # Clean data before calculating the average
     data_df_cleaned = f.cleanup_data(data_df_filtered)
 
-    #Get the average of each column per year
+    # Get the average of each column per year
     avg_year = f.average_per_year(data_df_cleaned)
 
+    # Get the country with highest average meat production
     f.country_with_highest_avg_meat(avg_year)
+
+    # Get the country with fifth highest COé emissions in 2010
+    f.country_with_5th_highest_co2(data_df_cleaned)
