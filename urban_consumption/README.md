@@ -22,3 +22,4 @@ The data in question has 2 files:
 4. Some columns ( Oil production (Etemad & Luciana) (terawatt-hours), 
    meat_prod_tonnes, and Food Balance Sheets: Eggs - Production (FAO (2017)) (tonnes) ) 
    report country total data. Transform these three columns into per-capita data (divide by country's population.)
+5. Several rows in the Entity ​​column have the value World. Remove these rows, since they don’t correspond to any particular country.

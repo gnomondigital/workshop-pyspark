@@ -41,12 +41,14 @@ def filter_dates(data_df: DataFrame) -> DataFrame:
     return filtered_df
 
 
-def merge_dataframes(df_1: DataFrame, df_2: DataFrame, df_3: DataFrame):
+def merge_dataframes(df_1: DataFrame, df_2: DataFrame, df_3: DataFrame) -> DataFrame:
     """Merge all dataframes into one"""
-    return df_1.join(df_2).join(df_3)
+    return df_1.join(df_2, on=["Entity", "Code", "year"]).join(
+        df_3, on=["Entity", "Code", "year"]
+    )
 
 
-def convert_to_per_capita(data_df: DataFrame, columns: List):
+def convert_to_per_capita(data_df: DataFrame, columns: List) -> DataFrame:
     """Convert columns from total to per population"""
     for col in columns:
         logging.info("Converting %s", col)
@@ -55,3 +57,11 @@ def convert_to_per_capita(data_df: DataFrame, columns: List):
         )
         data_df.select("Population", col, f"{col}_per_capita").show()
     return data_df
+
+
+def remove_world_entity(data_df: DataFrame) -> DataFrame:
+    """Remove rows with entity having the value World"""
+    logging.info("Data has %s rows before filtering", data_df.count())
+    filtered_data = data_df.filter(F.col("Entity") != "World")
+    logging.info("Filtered data has %s rows", filtered_data.count())
+    return filtered_data

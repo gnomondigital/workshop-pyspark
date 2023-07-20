@@ -33,3 +33,7 @@ if __name__ == "__main__":
         "meat_prod_tonnes",
     ]
     data_df_converted = f.convert_to_per_capita(data_df, cols_list)
+
+    # Remove rows with entity = World
+
+    data_df_filtered = f.remove_world_entity(data_df_converted)
