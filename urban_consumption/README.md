@@ -28,3 +28,5 @@ The data in question has 2 files:
    descriptive columns per country during this five-year period.
 7. which country has the highest average meat production per capita for the years 2008-2012?
 8. What country has the 5th highest CO2 emissions per capita for the year 2010 ?
+9. Add a classification column to compare oil production in 2012 to the median and indicate
+   if the country ahs above or below median production.

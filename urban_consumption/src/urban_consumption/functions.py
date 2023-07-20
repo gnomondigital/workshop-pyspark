@@ -1,8 +1,9 @@
 """This file contains query functions to answer the questions"""
 import logging
 from typing import List
-from pyspark.sql import SparkSession, DataFrame
+from pyspark.sql import SparkSession, DataFrame, Column
 import pyspark.sql.functions as F
+from pyspark.sql.types import StringType
 
 
 logging.basicConfig(level=logging.INFO)
@@ -125,4 +126,31 @@ def country_with_5th_highest_co2(data_df: DataFrame) -> str:
         "The country with the fifth highest CO2 emissions per capita is %s.",
         highest_fifth_country,
     )
-    return(highest_fifth_country)
+    return highest_fifth_country
+
+
+@F.udf(returnType=StringType())
+def classify_udf(oil_prod: Column, median: Column) -> Column:
+    """UDF function to classify Countries as above or below median for Oil production
+    Consumption in 2012"""
+    if oil_prod >= median:
+        return "Above median"
+    return "Below median"
+
+
+def classify_countries(data_df: DataFrame) -> DataFrame:
+    """Classify countries based on median in 2012"""
+    data_2012 = data_df.filter(F.col("Year") == 2012)
+    median_val = data_2012.agg(
+        F.median(
+            F.col("Oil_production_(Etemad_&_Luciana)_(terawatt-hours)_per_capita")
+        ).alias("median_oil_prod")
+    ).first()["median_oil_prod"]
+    data_2012_classified = data_2012.withColumn(
+        "Median_class",
+        classify_udf(
+            F.col("Oil_production_(Etemad_&_Luciana)_(terawatt-hours)_per_capita"),
+            F.lit(median_val),
+        ),
+    )
+    data_2012_classified.show()

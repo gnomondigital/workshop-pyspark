@@ -49,3 +49,6 @@ if __name__ == "__main__":
 
     # Get the country with fifth highest COé emissions in 2010
     f.country_with_5th_highest_co2(data_df_cleaned)
+
+    # Add a column to classify countries based on their Oil production in 2012
+    f.classify_countries(data_df_cleaned)
