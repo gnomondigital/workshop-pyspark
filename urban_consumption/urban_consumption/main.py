@@ -25,3 +25,11 @@ if __name__ == "__main__":
     # Merge Datasets
     data_df = f.merge_dataframes(co2_and_oil, meat_and_egg, urban_gdp)
     data_df.show()
+
+    # Convert columns from total to per capita
+    cols_list = [
+        "Oil production (Etemad & Luciana) (terawatt-hours)",
+        "Food Balance Sheets: Eggs - Production (FAO (2017)) (tonnes)",
+        "meat_prod_tonnes",
+    ]
+    data_df_converted = f.convert_to_per_capita(data_df, cols_list)

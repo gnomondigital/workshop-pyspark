@@ -1,8 +1,9 @@
 """This file contains query functions to answer the questions"""
 import logging
+from typing import List
 from pyspark.sql import SparkSession, DataFrame
-
 import pyspark.sql.functions as F
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -43,3 +44,14 @@ def filter_dates(data_df: DataFrame) -> DataFrame:
 def merge_dataframes(df_1: DataFrame, df_2: DataFrame, df_3: DataFrame):
     """Merge all dataframes into one"""
     return df_1.join(df_2).join(df_3)
+
+
+def convert_to_per_capita(data_df: DataFrame, columns: List):
+    """Convert columns from total to per population"""
+    for col in columns:
+        logging.info("Converting %s", col)
+        data_df = data_df.withColumn(
+            f"{col}_per_capita", F.col(col) / F.col("Population")
+        )
+        data_df.select("Population", col, f"{col}_per_capita").show()
+    return data_df

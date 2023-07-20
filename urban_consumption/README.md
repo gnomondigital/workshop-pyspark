@@ -17,3 +17,8 @@ The data in question has 2 files:
 
 # What the candidate should do #
 1. Load the data into dataframes and join them into a single one.
+2. Include only data from the year 2008 up to and including 2012.
+3. Merge the information from the three datasets into a single dataset.
+4. Some columns ( Oil production (Etemad & Luciana) (terawatt-hours), 
+   meat_prod_tonnes, and Food Balance Sheets: Eggs - Production (FAO (2017)) (tonnes) ) 
+   report country total data. Transform these three columns into per-capita data (divide by country's population.)
