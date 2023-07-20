@@ -43,3 +43,5 @@ if __name__ == "__main__":
 
     #Get the average of each column per year
     avg_year = f.average_per_year(data_df_cleaned)
+
+    f.country_with_highest_avg_meat(avg_year)

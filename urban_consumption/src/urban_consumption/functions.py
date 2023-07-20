@@ -96,3 +96,13 @@ def average_per_year(data_df: DataFrame) -> DataFrame:
     )
     avg_year.show()
     return avg_year
+
+
+def country_with_highest_avg_meat(data_df: DataFrame) -> str:
+    """Get the country that has the highest average meat production
+    per capita for the years 2008-2012"""
+    highest_meat = data_df.agg(
+        F.max(F.col("meat_prod_tonnes_per_capita")).alias("max_meat_prod"),
+    ).first()["max_meat_prod"]
+    highest_country = data_df.filter(F.col("meat_prod_tonnes_per_capita") == highest_meat).first()["Entity"]
+    logging.info("The country with highest average meat production is %s.",highest_country)

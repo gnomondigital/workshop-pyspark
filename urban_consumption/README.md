@@ -26,3 +26,4 @@ The data in question has 2 files:
 6. From the prepared dataset, create a new dataset that aggregates the values of the seven "descriptive" columns 
    (over the years 2008 - 2012) for each country. Each row in the new dataset should contain the average value of the 
    descriptive columns per country during this five-year period.
+7. which country has the highest average meat production per capita for the years 2008-2012?
